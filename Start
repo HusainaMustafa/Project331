@@ -1,0 +1,31 @@
+// Student class
+class Student {
+    int studentId;
+    String name;
+
+    // Constructor
+    Student(int id, String n) {
+        studentId = id;
+        name = n;
+    }
+
+    // Method to display details
+    void display() {
+        System.out.println("Student ID: " + studentId);
+        System.out.println("Name: " + name);
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+
+        Student s1 = new Student(101, "Ali");
+        Student s2 = new Student(102, "Sara");
+
+        s1.display();
+        System.out.println();
+
+        s2.display();
+    }
+}
