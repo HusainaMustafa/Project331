@@ -1,0 +1,56 @@
+import java.util.Scanner;
+
+class Student {
+    String id;
+    String name;
+    String course;
+    double gpa;
+
+    Student(String id, String name, String course, double gpa) {
+        this.id = id;
+        this.name = name;
+        this.course = course;
+        this.gpa = gpa;
+    }
+
+    void display() {
+        System.out.println("Student ID: " + id);
+        System.out.println("Name: " + name);
+        System.out.println("Course: " + course);
+        System.out.println("GPA: " + gpa);
+    }
+}
+
+public class StudentIDSystem {
+    public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+
+        Student[] students = {
+            new Student("S101", "Alice", "Computer Engineering", 3.8),
+            new Student("S102", "Bob", "Mechanical Engineering", 3.5),
+            new Student("S103", "Charlie", "Electrical Engineering", 3.9),
+            new Student("S104", "Diana", "Civil Engineering", 3.6)
+        };
+
+        System.out.print("Enter Student ID: ");
+        String searchID = input.nextLine();
+
+        boolean found = false;
+
+        for (Student s : students) {
+            if (s.id.equalsIgnoreCase(searchID)) {
+                System.out.println("\nStudent Found!");
+                s.display();
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            System.out.println("Student ID not found.");
+        }
+
+        input.close();
+    }
+}
