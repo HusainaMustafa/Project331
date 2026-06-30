@@ -1,0 +1,61 @@
+public class SharedData {
+
+	public int A1,A2,A3,B1,B2,B3;
+	private boolean a1done = false;
+	private boolean b2done = false;
+	private boolean a2done = false;
+	private boolean b3done = false;
+
+	//A1 and B1 dont depend on anything so they can just run
+	public synchronized void funcA1(){
+		A1 = Utility.sum(500);
+		a1done = true;
+		System.out.println("A1 = "+A1);
+		notifyAll();
+	}
+
+	public synchronized void funcB1() {
+		B1 = Utility.sum(250);
+		System.out.println("B1 = " + B1);
+		notifyAll();
+	}
+
+	// waits for A1 to finish first
+	public synchronized void funcB2() throws InterruptedException{
+		while(!a1done){
+			wait();
+		}
+		B2 = A1 + Utility.sum(200);
+		b2done = true;
+		System.out.println("B2 = "+B2);
+		notifyAll();
+	}
+
+	public synchronized void funcA2() throws InterruptedException {
+		while (!b2done) {
+			wait();
+		}
+		A2 = B2 + Utility.sum(300);
+		a2done = true;
+		System.out.println("A2 = " + A2);
+		notifyAll();
+	}
+
+	public synchronized void funcB3() throws InterruptedException{
+		while(!a2done) wait();
+		B3 = A2 + Utility.sum(400);
+		b3done = true;
+		System.out.println("B3 = " + B3);
+		notifyAll();
+	}
+
+	//last step, depends on B3
+	public synchronized void funcA3() throws InterruptedException {
+		while (!b3done){
+			wait();
+		}
+		A3 = B3 + Utility.sum(400);
+		System.out.println("A3 = " + A3);
+		notifyAll();
+	}
+}
