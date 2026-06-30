@@ -1,0 +1,21 @@
+public class ThreadB extends Thread {
+
+    SharedData data;
+
+    public ThreadB(SharedData data) {
+        this.data = data;
+    }
+
+    @Override
+    public void run() {
+        try {
+
+            data.funcB1();
+            data.funcB2();
+            data.funcB3();
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
